@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 import Acceso.Conex;
 import java.io.IOException;
@@ -18,22 +13,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import negocio.Usuario;
 
-/**
- *
- * @author XM21
- */
+
 @WebServlet(urlPatterns = {"/inicio"})
 public class inicio extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
@@ -47,26 +31,23 @@ public class inicio extends HttpServlet {
 
                 Usuario usu = new Usuario(userid, pwd);
                 HttpSession session = request.getSession();
-                
-                session.setAttribute("usuario", usu);
-                                session.setAttribute("user", userid);
 
-                
-                      String d=(""+con.getResultado().getString("usuario_id"));
-                     Integer a=new Integer(d);
-               
-               
-              session.setAttribute("use", a);
+                session.setAttribute("usuario", usu);
+                session.setAttribute("user", userid);
+
+                String d = ("" + con.getResultado().getString("usuario_id"));
+                Integer a = new Integer(d);
+
+                session.setAttribute("use", a);
                 response.sendRedirect("index.jsp");
-            } 
-            else if (request.getParameter("out") != null) {
-                
-                 HttpSession session = request.getSession();
+            } else if (request.getParameter("out") != null) {
+
+                HttpSession session = request.getSession();
                 session.removeAttribute("usuario");
-                
+
                 response.sendRedirect("login.jsp");
 
-            }
+            } else { response.sendRedirect("login.jsp");}
 
         }
     }
