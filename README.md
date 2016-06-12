@@ -1,4 +1,5 @@
-# prueba3´´´
+# prueba3
+```
 
 
 MariaDB [libros]> create table usuarios(usuario_id int(10) primary key not null auto_increment,
@@ -31,13 +32,12 @@ MariaDB [libros]> create table libros (libro_id int (10) primary key not null au
 
 
 
+NOMBRE:Osvaldo Paredes Iturra
+RUT:16.635.834-5
 
 
 
 
 
 
-
-
-
-´´´
+```
