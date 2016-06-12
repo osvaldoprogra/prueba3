@@ -120,7 +120,7 @@
                             </div>
                              
                             
-                            <button type="submit" class="btn btn-default">ACTUALIZAR</button>
+                            <button type="submit" class="btn btn-danger">ACTUALIZAR</button>
                         </form>
                        <% } %> 
 

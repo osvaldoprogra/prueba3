@@ -117,7 +117,7 @@
                                 <input type="text" class="form-control" name="nombre" value='<% out.println(""+con.getResultado().getString("nombre")); %>' id="nombre" placeholder="Ingresar Nombre">
                             </div>
                            
-                            <button type="submit" class="btn btn-default">ACTUALIZAR</button>
+                            <button type="submit" class="btn btn-danger">ACTUALIZAR</button>
                         </form>
                        <% } %> 
 

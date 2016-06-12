@@ -115,7 +115,9 @@
                             <thead>
                             <th>ID</th>
                             <th>User</th>
-                            <th>Acciones</th>
+                            <th>ELIMINAR</th>
+                            <th>EDITAR</th>
+
                             </thead>
                             <tbody>
                                 <%

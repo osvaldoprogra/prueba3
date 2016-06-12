@@ -80,21 +80,21 @@
                 </div>
             </div>
         </nav>
-                <%
+        <%
 
-                Usuario usu = (Usuario) session.getAttribute("usuario");
-                session.setAttribute("usuario", usu);
+            Usuario usu = (Usuario) session.getAttribute("usuario");
+            session.setAttribute("usuario", usu);
 
-                if (usu == null) {
+            if (usu == null) {
 
-                    response.sendRedirect("../login.jsp");
+                response.sendRedirect("../login.jsp");
 
-                }
+            }
 
-            %>        
-                        
-                        
-                        
+        %>        
+
+
+
         <div class="container">
             <br><br><br>
             <div class="row">
@@ -102,15 +102,16 @@
                     <div class="panel-heading">
                         <h3 class="panel-title">Actualizar</h3>
                     </div>
-                    <%
-                        int id = Integer.parseInt(request.getParameter("editar"));
+                    <%                        int id = Integer.parseInt(request.getParameter("editar"));
                         Conex con = new Conex();
-                        con.setConsulta("select * from libros where libro_id='" + id + "'");
+                        con.setConsulta("select libros.libro_id,libros.nombre,libros.isbn,libros.cantidad_paginas,idiomas.nombre as idioma,autores.nombre as autor from idiomas,autores,libros where idiomas.idioma_id=libros.idioma_id and libros.autor_id=autores.autor_id and libros.libro_id='" + id + "'");
                     %>
                     <div class="panel-body">
                         <% while (con.getResultado().next()) {  %>
 
                         <form method="POST" action="../ServletLibro?editar=si">
+
+
                             <%
                                 HttpSession s = request.getSession();
                                 Integer ad = (Integer) s.getAttribute("use");
@@ -129,13 +130,25 @@
                             </div>
                             <div class="form-group">
                                 <label for="nombre">Cantidad_pag </label>
-                                <input type="text" class="form-control" name="cantidad" value='<% out.println("" + con.getResultado().getString("cantidad_paginas")); %>' id="nombre" placeholder="Ingresar Nombre">
+                                <input type="text" class="form-control" name="cantidad" value='<% out.println("" + con.getResultado().getString("cantidad_paginas")); %>' id="nombre" placeholder="Ingresar cantidad">
                             </div>
-                            <div class="form-group">
-                                <label for="nombre">Autor</label>
+
+                            <div class="col-md-6">
+                                <label for="nombre">Autor </label>
+                                <input type="text" class="form-control" readonly="true" value='<% out.println("" + con.getResultado().getString("autor")); %>' id="nombre" placeholder="Ingresar Nombre">
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="nombre">Idoma</label>
+                                <input type="text" class="form-control"  readonly="true"value='<% out.println("" + con.getResultado().getString("idioma")); %>' id="nombre" placeholder="Ingresar Nombre">
+                            </div>
+
+                            <div class="col-md-6">
+
                                 <select  name="autor" class="form-control">
 
-                            
+                                    <option value="0">Seleccionar Autor</option>
+
 
                                     <%
 
@@ -148,24 +161,25 @@
                                     <% while (con.getResultado().next()) { %>
                                     <option value=<% out.println("" + con.getResultado().getString("autor_id")); %>><% out.println("" + con.getResultado().getString("nombre")); %></option>
                                     <%}%>
-                                    
-                                    
-                                    
-                                    
+
+
+
+
                                 </select>
 
 
                             </div>
 
-                            <div class="form-group">
-                                <label for="nombre">Idioma</label>
-                                  <select  name="idioma" class="form-control">
-                          
-                                <%
+                            <div class="col-md-6">
+                                <select  name="idioma" class="form-control">
 
-                                    con.setConsulta("select * from idiomas where estado='activo'");
-                                %>
-                              
+                                    <option value="0">Seleccionar Idioma</option>
+
+                                    <%
+
+                                        con.setConsulta("select * from idiomas where estado='activo'");
+                                    %>
+
                                     <% while (con.getResultado().next()) { %>
                                     <option value=<% out.println("" + con.getResultado().getString("idioma_id")); %>><% out.println("" + con.getResultado().getString("nombre")); %></option>
                                     <% } %>
@@ -173,11 +187,15 @@
 
 
                             </div>
+                            <br>
+                            <div class="col-md-12"><br>
+                                <button type="submit" class="btn btn-danger">ACTUALIZAR</button>
+
+
+                            </div>
 
 
 
-
-                            <button type="submit" class="btn btn-default">ACTUALIZAR</button>
                         </form>
                         <% }%> 
 
