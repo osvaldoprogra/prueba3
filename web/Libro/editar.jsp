@@ -133,15 +133,7 @@
                                 <input type="text" class="form-control" name="cantidad" value='<% out.println("" + con.getResultado().getString("cantidad_paginas")); %>' id="nombre" placeholder="Ingresar cantidad">
                             </div>
 
-                            <div class="col-md-6">
-                                <label for="nombre">Autor </label>
-                                <input type="text" class="form-control" readonly="true" value='<% out.println("" + con.getResultado().getString("autor")); %>' id="nombre" placeholder="Ingresar Nombre">
-                            </div>
-
-                            <div class="col-md-6">
-                                <label for="nombre">Idoma</label>
-                                <input type="text" class="form-control"  readonly="true"value='<% out.println("" + con.getResultado().getString("idioma")); %>' id="nombre" placeholder="Ingresar Nombre">
-                            </div>
+                        
 
                             <div class="col-md-6">
 

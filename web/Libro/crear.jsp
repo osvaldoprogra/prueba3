@@ -15,7 +15,7 @@
         <link href="../template/css/bootstrap.min.css" rel="stylesheet">
     </head>
     <body>
-       <nav class="navbar navbar-inverse navbar-fixed-top">
+        <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -29,69 +29,69 @@
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="../index.jsp">Home</a></li>
-                      
+
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Autor<span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="../Autor/index.jsp">Autor</a></li>
                                 <li><a href="../Autor/crear.jsp">Nuevo</a></li>
-                               
+
                             </ul>
                         </li>
-                            <li class="dropdown">
+                        <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Libro<span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="../Libro/index.jsp">Libro</a></li>
                                 <li><a href="../Libro/crear.jsp">Nuevo</a></li>
-                               
+
                             </ul>
                         </li>
-                         <li class="dropdown">
+                        <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Idioma<span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="../Idioma/index.jsp">Idioma</a></li>
                                 <li><a href="../Idioma/crear.jsp">Nuevo</a></li>
-                              
-                               
+
+
                             </ul>
                         </li>
-                           <li class="dropdown">
+                        <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Usuario<span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                                              <li><a href="../Usuario/index.jsp">Usuario</a></li>
+                                <li><a href="../Usuario/index.jsp">Usuario</a></li>
 
                                 <li><a href="../Usuario/crear.jsp">Nuevo</a></li>
-                                
-                               
+
+
                             </ul>
                         </li>
                     </ul>
-                          <form class="navbar-form navbar-right" method="post" action="../inicio"> 
-           <div class="form-group">
-                 <%
-                           
-                            String a=(String)session.getAttribute("user");
-                            
+                    <form class="navbar-form navbar-right" method="post" action="../inicio"> 
+                        <div class="form-group">
+                            <%
+
+                                String a = (String) session.getAttribute("user");
+
                             %>
-                             <label for="nombre">USER:</label><input type="text" placeholder="Email" readonly="true" class="form-control" value='<% out.println(a); %>'>
-            </div>
-            <button type="submit" name="out" class="btn btn-success">Salir</button>
-          </form>
+                            <label for="nombre">USER:</label><input type="text" placeholder="Email" readonly="true" class="form-control" value='<% out.println(a); %>'>
+                        </div>
+                        <button type="submit" name="out" class="btn btn-success">Salir</button>
+                    </form>
                 </div>
             </div>
         </nav>
-            <%
+        <%
 
-                Usuario usu = (Usuario) session.getAttribute("usuario");
-                session.setAttribute("usuario", usu);
+            Usuario usu = (Usuario) session.getAttribute("usuario");
+            session.setAttribute("usuario", usu);
 
-                if (usu == null) {
+            if (usu == null) {
 
-                    response.sendRedirect("../login.jsp");
+                response.sendRedirect("../login.jsp");
 
-                }
+            }
 
-            %>
+        %>
         <div class="container">
             <br><br><br>
             <div class="row">
@@ -101,10 +101,9 @@
                     </div>
                     <div class="panel-body">
                         <form method="POST" action="../ServletLibro">
-                            <%
-                            HttpSession s=request.getSession();
-                            Integer ad=(Integer)s.getAttribute("use");
-                            
+                            <%                                HttpSession s = request.getSession();
+                                Integer ad = (Integer) s.getAttribute("use");
+
                             %>
                             IdUsuario: <input type="text" readonly="true" value='<% out.println(ad); %>' name="idd"><br><br>
                             <div class="form-group">
@@ -117,39 +116,49 @@
                             </div>
                             <div class="form-group">
                                 <label for="nombre">Cantidad_paginas</label>
-                                <input type="text" class="form-control" name="cantidad_paginas" id="nombre" placeholder="Ingresar cantidad paginas">
+                                <input type="number" class="form-control" name="cantidad_paginas" id="nombre" placeholder="Ingresar cantidad paginas">
                             </div>
-                           
-                        
-                           
-                          
-                           <div class="form-group">
-                                <label for="nombre">Autor</label>
-                                <%
-                                    Conex con=new Conex();
-                                    con.setConsulta("select * from autores where estado='activo'");
-                                %>
+
+
+
+
+                            <div class="col-md-6">
                                 <select  name="autor" class="form-control">
-                                    <% while(con.getResultado().next()){ %>
-                                    <option value=<% out.println(""+con.getResultado().getString("autor_id")); %>><% out.println(""+con.getResultado().getString("nombre")); %></option>
+                                    <option value="0">Seleccionar Autor</option>
+
+                                    <%
+                                        Conex con = new Conex();
+                                        con.setConsulta("select * from autores where estado='activo'");
+                                    %>
+
+                                    <% while (con.getResultado().next()) { %>
+                                    <option value=<% out.println("" + con.getResultado().getString("autor_id")); %>><% out.println("" + con.getResultado().getString("nombre")); %></option>
                                     <% } %>
                                 </select>
-                         
+
 
                             </div>
 
-                         <div class="form-group">
-                                <label for="nombre">Idioma</label>
-                                <%
-                                   
-                                    con.setConsulta("select * from idiomas where estado='activo'");
-                                %>
+                            <div class="col-md-6">
                                 <select  name="idioma" class="form-control">
-                                    <% while(con.getResultado().next()){ %>
-                                    <option value=<% out.println(""+con.getResultado().getString("idioma_id")); %>><% out.println(""+con.getResultado().getString("nombre")); %></option>
-                                    <% } %>
+                                    <option value="0">Seleccionar Idioma</option>
+
+                                    <%
+
+                                        con.setConsulta("select * from idiomas where estado='activo'");
+                                    %>
+
+                                    <% while (con.getResultado().next()) { %>
+                                    <option value=<% out.println("" + con.getResultado().getString("idioma_id")); %>><% out.println("" + con.getResultado().getString("nombre")); %></option>
+                                    <% }%>
                                 </select>
-                         
+
+
+                            </div>
+
+
+                            <div class="col-md-12"><br>
+                                <button type="submit" class="btn btn-default" name="guardar">Guardar</button>
 
                             </div>
 
@@ -157,9 +166,6 @@
 
 
 
-                           
-
-                            <button type="submit" class="btn btn-default" name="guardar">Guardar</button>
                         </form>
 
 
