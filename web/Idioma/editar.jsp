@@ -80,6 +80,20 @@
                 </div>
             </div>
         </nav>
+           
+              <%
+
+                Usuario usu = (Usuario) session.getAttribute("usuario");
+                session.setAttribute("usuario", usu);
+
+                if (usu == null) {
+
+                    response.sendRedirect("../login.jsp");
+
+                }
+
+            %>
+            
         <div class="container">
              <br><br><br>
             <div class="row">
