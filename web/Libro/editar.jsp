@@ -104,7 +104,7 @@
                     </div>
                     <%                        int id = Integer.parseInt(request.getParameter("editar"));
                         Conex con = new Conex();
-                        con.setConsulta("select libros.autor_id as aut,libros.bodega_id,libros.libro_id,libros.nombre,libros.isbn,libros.cantidad_paginas,idiomas.nombre as idioma,autores.nombre as autor,bodegas.nombre as bode from idiomas,autores,libros,bodegas where bodegas.bodega_id=libros.bodega_id and idiomas.idioma_id=libros.idioma_id and libros.autor_id=autores.autor_id and libros.libro_id='" + id + "'");
+                        con.setConsulta("select libros.autor_id ,libros.bodega_id,libros.libro_id,libros.nombre,libros.isbn,libros.cantidad_paginas,idiomas.nombre as idioma,autores.nombre as autor,bodegas.nombre as bode from idiomas,autores,libros,bodegas where bodegas.bodega_id=libros.bodega_id and idiomas.idioma_id=libros.idioma_id and libros.autor_id=autores.autor_id and libros.libro_id='" + id + "'");
                     %>
                     <div class="panel-body">
                         <% while (con.getResultado().next()) {  %>
@@ -136,14 +136,19 @@
 
                                 <select  name="bodega" class="form-control">
 
-                                    <option value='<% out.println("" + con.getResultado().getString("bodega_id")); %>'><% out.println("" + con.getResultado().getString("bode")); %></option>
+                                    <option value=<% out.println("" + con.getResultado().getString("bodega_id")); %>><% out.println("" + con.getResultado().getString("bode")); %></option>
 
 
                                     <%
 
                                         con.setConsulta("select * from bodegas where estado='activo'");
-                                    %> <% while (con.getResultado().next()) { %>
-                                    <option value='<% out.println("" + con.getResultado().getString("bodega_id")); %>'><% out.println("" + con.getResultado().getString("nombre")); %></option>
+                                    %>
+
+
+
+
+                                    <% while (con.getResultado().next()) { %>
+                                    <option value=<% out.println("" + con.getResultado().getString("bodega_id")); %>><% out.println("" + con.getResultado().getString("nombre")); %></option>
                                     <%}%>
 
 
@@ -155,25 +160,6 @@
                             </div>
 
 
-
-
-
-                            <div class="form-group">
-                                <select  name="idioma" class="form-control">
-
-
-                                    <%
-
-                                        con.setConsulta("select * from idiomas where estado='activo'");
-                                    %>
-
-                                    <% while (con.getResultado().next()) { %>
-                                    <option value=<% out.println("" + con.getResultado().getString("idioma_id")); %>><% out.println("" + con.getResultado().getString("nombre")); %></option>
-                                    <% } %>
-                                </select>
-
-
-                            </div>
 
                             <div class="form-group">
 
@@ -190,7 +176,7 @@
 
 
                                     <% while (con.getResultado().next()) { %>
-                                    <option value='<% out.println("" + con.getResultado().getString("au")); %>'><% out.println("" + con.getResultado().getString("nom")); %></option>
+                                    <option value=<% out.println("" + con.getResultado().getString("au")); %>><% out.println("" + con.getResultado().getString("nom")); %></option>
                                     <%}%>
 
 
@@ -199,8 +185,24 @@
                                 </select>
 
 
-                            </div>   
+                            </div>
 
+                            <div class="form-group">
+                                <select  name="idioma" class="form-control">
+
+                                    
+                                    <%
+
+                                        con.setConsulta("select * from idiomas where estado='activo'");
+                                    %>
+
+                                    <% while (con.getResultado().next()) { %>
+                                    <option value=<% out.println("" + con.getResultado().getString("idioma_id")); %>><% out.println("" + con.getResultado().getString("nombre")); %></option>
+                                    <% } %>
+                                </select>
+
+
+                            </div>
                             <br>
                             <div class="col-md-12"><br>
                                 <button type="submit" class="btn btn-danger">ACTUALIZAR</button>
