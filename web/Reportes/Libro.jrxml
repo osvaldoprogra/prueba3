@@ -7,7 +7,7 @@
 	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
 	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
 	<style name="Detail" fontName="Arial" fontSize="12"/>
-	<queryString language="SQL">
+	<queryString>
 		<![CDATA[SELECT
      autores.`nombre` AS autores_nombre,
      bodegas.`nombre` AS bodegas_nombre,
@@ -22,16 +22,16 @@ FROM
      `libros` libros INNER JOIN `usuarios` usuarios ON libros.`creado_por` = usuarios.`usuario_id`
      INNER JOIN `autores` autores ON libros.`autor_id` = autores.`autor_id`
      INNER JOIN `bodegas` bodegas ON libros.`bodega_id` = bodegas.`bodega_id`
-     INNER JOIN `idiomas` idiomas ON libros.`idioma_id` = idiomas.`idioma_id`]]>
+     INNER JOIN `idiomas` idiomas ON libros.`idioma_id` = idiomas.`idioma_id` and libros.`estado`='activo' ]]>
 	</queryString>
+	<field name="autores_nombre" class="java.lang.String"/>
+	<field name="bodegas_nombre" class="java.lang.String"/>
+	<field name="idiomas_nombre" class="java.lang.String"/>
 	<field name="libros_libro_id" class="java.lang.Integer"/>
 	<field name="libros_isbn" class="java.lang.String"/>
 	<field name="libros_nombre" class="java.lang.String"/>
-	<field name="autores_nombre" class="java.lang.String"/>
-	<field name="idiomas_nombre" class="java.lang.String"/>
 	<field name="libros_cantidad_paginas" class="java.lang.Integer"/>
 	<field name="libros_estado" class="java.lang.String"/>
-	<field name="bodegas_nombre" class="java.lang.String"/>
 	<field name="usuarios_user" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>

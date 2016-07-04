@@ -7,13 +7,13 @@
 	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
 	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
 	<style name="Detail" fontName="Arial" fontSize="12"/>
-	<queryString language="SQL">
+	<queryString>
 		<![CDATA[SELECT
      idiomas.`idioma_id` AS idiomas_idioma_id,
      idiomas.`nombre` AS idiomas_nombre,
      idiomas.`estado` AS idiomas_estado
 FROM
-     `idiomas` idiomas]]>
+     `idiomas` idiomas where estado='activo']]>
 	</queryString>
 	<field name="idiomas_idioma_id" class="java.lang.Integer"/>
 	<field name="idiomas_nombre" class="java.lang.String"/>
