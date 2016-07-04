@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Bodega" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4c4a984b-6abb-4c78-9da8-ff6f1a658c44">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     bodegas.`bodega_id` AS bodegas_bodega_id,
+     bodegas.`nombre` AS bodegas_nombre,
+     sucursales.`nombre` AS sucursales_nombre,
+     bodegas.`estado` AS bodegas_estado,
+     usuarios.`user` AS usuarios_user
+FROM
+     `bodegas` bodegas INNER JOIN `sucursales` sucursales ON bodegas.`sucursal_id` = sucursales.`sucursal_id`
+     INNER JOIN `usuarios` usuarios ON bodegas.`creado_por` = usuarios.`usuario_id`]]>
+	</queryString>
+	<field name="bodegas_bodega_id" class="java.lang.Integer"/>
+	<field name="bodegas_nombre" class="java.lang.String"/>
+	<field name="sucursales_nombre" class="java.lang.String"/>
+	<field name="bodegas_estado" class="java.lang.String"/>
+	<field name="usuarios_user" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="70" splitType="Stretch">
+			<image>
+				<reportElement x="275" y="0" width="300" height="64" uuid="bf15c98e-ce51-43a6-b657-df14d8fcbe94"/>
+				<imageExpression><![CDATA["leaf_banner_red.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement style="Title" x="0" y="13" width="263" height="33" uuid="62fb306f-f7cd-4792-b985-2e68cc970a31"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Bodega]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="SubTitle" x="117" y="46" width="157" height="22" uuid="5f201f19-2807-44d5-a9a8-45954b8c3aae"/>
+				<text><![CDATA[Listado]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="36" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="35" width="555" height="1" uuid="6a750adc-a1f1-41fc-a1f7-59bc9ae3f76c"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement style="Column header" x="0" y="19" width="111" height="15" uuid="c98bb7fa-c89a-49a6-a8de-b3e803367afd"/>
+				<text><![CDATA[bodega_id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="111" y="19" width="111" height="15" uuid="5d77ffd9-444f-4861-9051-82f9505148cf"/>
+				<text><![CDATA[bodegas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="222" y="19" width="111" height="15" uuid="010fcada-507f-432c-bb5a-fb072833b08e"/>
+				<text><![CDATA[sucursales]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="442" y="20" width="111" height="15" uuid="4ab574da-24f2-49f5-8bfb-885c4733eb47"/>
+				<text><![CDATA[estado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="322" y="19" width="111" height="15" uuid="abed9aff-3b53-4162-a2b7-9e0dc58806c8"/>
+				<text><![CDATA[creado_por]]></text>
+			</staticText>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="442" y="0" width="100" height="20" uuid="d5bf26a3-863e-4532-bb1f-6ff4efa87cc6"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="15" width="555" height="1" uuid="8d723c2d-145f-4c80-a017-e5f97d72b027"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement style="Detail" x="0" y="0" width="111" height="15" uuid="9b101dc1-9baa-4e61-9678-ce3a5087e457"/>
+				<textFieldExpression><![CDATA[$F{bodegas_bodega_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="111" y="0" width="111" height="15" uuid="24112045-0474-4d94-97e2-d522470617f7"/>
+				<textFieldExpression><![CDATA[$F{bodegas_nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="222" y="0" width="111" height="15" uuid="777c22fe-0bb3-4243-9ae2-539df59c6221"/>
+				<textFieldExpression><![CDATA[$F{sucursales_nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="322" y="0" width="111" height="15" uuid="72ea1af6-5354-46ff-8100-75b04334beee"/>
+				<textFieldExpression><![CDATA[$F{usuarios_user}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="442" y="1" width="111" height="15" uuid="2b49db4a-b452-41df-8aa1-0e7a11df872c"/>
+				<textFieldExpression><![CDATA[$F{bodegas_estado}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="3462194b-bc6f-4faa-966e-2f7b0efdfd89"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement style="Column header" x="433" y="0" width="80" height="20" uuid="d460c58d-36df-4413-b5de-705f00df2459"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement style="Column header" x="513" y="0" width="40" height="20" uuid="e949ba25-0b75-4cd4-b51e-483631849e8a"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

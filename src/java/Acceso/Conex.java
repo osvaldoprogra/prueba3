@@ -19,7 +19,7 @@ public class Conex {
         String driver = "com.mysql.jdbc.Driver";
         String user = "root";
         String pass = "";
-        String url = "jdbc:mysql://localhost:3306/inacap";
+        String url = "jdbc:mysql://localhost:3306/libros";
         try {
             Class.forName(driver);
             con = DriverManager.getConnection(url, user, pass);
@@ -29,7 +29,9 @@ public class Conex {
         }
     }
 
-    
+    public Connection getConexion(){
+        return con;
+}
     public void setConsulta(String sql) {
         try {
             stmt = con.createStatement();

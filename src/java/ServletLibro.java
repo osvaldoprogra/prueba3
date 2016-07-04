@@ -35,57 +35,61 @@ public class ServletLibro extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             Libro rs = new Libro();
-            
+
             if (request.getParameter("eliminar") != null) {
                 int eliminar_id = Integer.parseInt(request.getParameter("eliminar"));
                 rs.setLibro_id(eliminar_id);
                 rs.delete();
-                
+
                 response.sendRedirect("Libro/index.jsp");
-                
+
             } else if (request.getParameter("editar") != null) {
-                 int id = Integer.parseInt(request.getParameter("id"));
+                int id = Integer.parseInt(request.getParameter("id"));
                 String isbn = request.getParameter("isbn");
                 String nombre = request.getParameter("nombre");
                 int cantidad = Integer.parseInt(request.getParameter("cantidad"));
-                int idioma=Integer.parseInt(request.getParameter("idioma"));
-               int autor=Integer.parseInt(request.getParameter("autor"));
+                int idioma = Integer.parseInt(request.getParameter("idioma"));
+                int autor = Integer.parseInt(request.getParameter("autor"));
                 int idd = Integer.parseInt(request.getParameter("idd"));
-                
+                int bo = Integer.parseInt(request.getParameter("bodega"));
+
                 rs.setIsbn(isbn);
                 rs.setNombre(nombre);
                 rs.setCantidad_pagina(cantidad);
                 rs.setAutor_id(autor);
                 rs.setIdioma_id(idioma);
+                rs.setBodega_id(bo);
+
                 rs.setCreado_por(idd);
                 rs.setLibro_id(id);
-                
-                
+
                 rs.update();
-                
+
                 response.sendRedirect("Libro/index.jsp");
-                
+
             } else {
-                
+
                 String isbn = request.getParameter("isbn");
                 String nombre = request.getParameter("nombre");
                 int cantidad = Integer.parseInt(request.getParameter("cantidad_paginas"));
                 int cant = Integer.parseInt(request.getParameter("autor"));
                 int canti = Integer.parseInt(request.getParameter("idioma"));
-                
+
                 int ca = Integer.parseInt(request.getParameter("idd"));
-                
+                int bo = Integer.parseInt(request.getParameter("bodega"));
+
                 rs.setIsbn(isbn);
                 rs.setNombre(nombre);
                 rs.setCantidad_pagina(cantidad);
                 rs.setIdioma_id(canti);
                 rs.setAutor_id(cant);
+                rs.setBodega_id(bo);
                 rs.setCreado_por(ca);
                 rs.save();
                 response.sendRedirect("Libro/index.jsp");
-                
+
             }
-            
+
         }
     }
 

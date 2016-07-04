@@ -119,15 +119,30 @@
                                 <input type="number" class="form-control" name="cantidad_paginas" id="nombre" placeholder="Ingresar cantidad paginas">
                             </div>
 
+                          
+
+                            <div class="form-group">
+                                <select  name="bodega" class="form-control">
+                                    <option value="0">Seleccionar Bodega</option>
+
+                                    <%
+                                        Conex con = new Conex();
+                                        con.setConsulta("select * from bodegas where estado='activo'");
+                                    %>
+
+                                    <% while (con.getResultado().next()) { %>
+                                    <option value=<% out.println("" + con.getResultado().getString("bodega_id")); %>><% out.println("" + con.getResultado().getString("nombre")); %></option>
+                                    <% } %>
+                                </select>
 
 
-
-                            <div class="col-md-6">
+                            </div>
+                            <div class="form-group">
                                 <select  name="autor" class="form-control">
                                     <option value="0">Seleccionar Autor</option>
 
                                     <%
-                                        Conex con = new Conex();
+
                                         con.setConsulta("select * from autores where estado='activo'");
                                     %>
 
@@ -139,7 +154,7 @@
 
                             </div>
 
-                            <div class="col-md-6">
+                            <div class="form-group">
                                 <select  name="idioma" class="form-control">
                                     <option value="0">Seleccionar Idioma</option>
 

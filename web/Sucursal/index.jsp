@@ -29,123 +29,125 @@
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="../index.jsp">Home</a></li>
-                      
+
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Autor<span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="../Autor/index.jsp">Autor</a></li>
                                 <li><a href="../Autor/crear.jsp">Nuevo</a></li>
-                               
+
                             </ul>
                         </li>
-                            <li class="dropdown">
+                        <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Libro<span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="../Libro/index.jsp">Libro</a></li>
                                 <li><a href="../Libro/crear.jsp">Nuevo</a></li>
-                               
+
                             </ul>
                         </li>
-                         <li class="dropdown">
+                        <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Idioma<span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="../Idioma/index.jsp">Idioma</a></li>
                                 <li><a href="../Idioma/crear.jsp">Nuevo</a></li>
-                              
-                               
+
+
                             </ul>
                         </li>
-                           <li class="dropdown">
+                        <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Usuario<span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="../Usuario/index.jsp">Usuario</a></li>
                                 <li><a href="../Usuario/crear.jsp">Nuevo</a></li>
-                                
-                               
+
+
                             </ul>
                         </li>
                     </ul>
-                          <form class="navbar-form navbar-right" method="post" action="../inicio"> 
-           <div class="form-group">
-                 <%
-                           
-                            String a=(String)session.getAttribute("user");
-                            
+                    <form class="navbar-form navbar-right" method="post" action="../inicio"> 
+                        <div class="form-group">
+                            <%
+
+                                String a = (String) session.getAttribute("user");
+
                             %>
-                             <label for="nombre">USER:</label><input type="text" placeholder="Email" readonly="true" class="form-control" value='<% out.println(a); %>'>
-            </div>
-            <button type="submit" name="out" class="btn btn-success">Salir</button>
-          </form>
+                            <label for="nombre">USER:</label><input type="text" placeholder="Email" readonly="true" class="form-control" value='<% out.println(a); %>'>
+                        </div>
+                        <button type="submit" name="out" class="btn btn-success">Salir</button>
+                    </form>
                 </div>
             </div>
         </nav>
-           <%
+        <%
 
-                Usuario usu = (Usuario) session.getAttribute("usuario");
-                session.setAttribute("usuario", usu);
+            Usuario usu = (Usuario) session.getAttribute("usuario");
+            session.setAttribute("usuario", usu);
 
-                if (usu == null) {
+            if (usu == null) {
 
-                    response.sendRedirect("../login.jsp");
+                response.sendRedirect("../login.jsp");
 
-                }
+            }
 
-            %>
+        %>
         <div class="container">
             <br><br><br>
             <div class="row">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
-                        <h3 class="panel-title">Listar Autor</h3>
+                        <h3 class="panel-title">Lista </h3>
                     </div>
                     <div class="panel-body">
-                        <a href="crear.jsp" class="btn btn-primary">NUEVO AUTOR</a>
+                        <a href="crear.jsp" class="btn btn-primary">Nueva Sucursal</a>
                         <a href="pdf.jsp" class="btn btn-primary">Listado en PDF</a>
                         <br><br>
-                   <br>
-                 <form method="POST" action="index.jsp">
+                        <br>
+                        <form method="POST" action="index.jsp">
                             <div class="form-group">
                                 <label for="nombre">buscar </label>
                                 <input type="text" class="form-control" name="buscarNombre" id="nombre" placeholder="Ingresar Nombre">
                             </div>
-                           <button type="submit" class="btn btn-default" name="buscar">buscar</button> 
+                            <button type="submit" class="btn btn-default" name="buscar">buscar</button> 
                         </form>   
-                   <br>
+                        <br>
                         <table class="table table-condensed table-hover table-bordered">
                             <thead>
                             <th>ID</th>
                             <th>NOMBRE</th>
 
+                            <th>CREADO_POR</th>
+
                             <th>Eliminar</th>
-                                                        <th>Editar</th>
+                            <th>Editar</th>
 
                             </thead>
                             <tbody>
-                                 <%
-                 Conex con=new Conex();
-                if (request.getParameter("buscarNombre") != null) {
-                    if (request.getParameter("buscarNombre").isEmpty()) {
-                        con.setConsulta("select * from autores where estado='activo'");
-                    } else {
-                        String nombre = request.getParameter("buscarNombre");
-                        con.setConsulta("select * from autores where nombre like '%"+nombre+"%' and estado='activo'");
-                    }
-                }else{
-                    con.setConsulta("select * from autores where estado='activo'");
-                }
-            
-                                  
-                                 
-                                   while(con.getResultado().next()){
-                                    out.println("<tr>");
-                                       out.println("<td>"+con.getResultado().getString("autor_id")+"</td>");
-                                       out.println("<td>"+con.getResultado().getString("nombre")+"</td>");
-                                      
-                                      out.println("<td>"+"<a href='../ServletAutor?eliminar="+con.getResultado().getString("autor_id")+"' class='btn btn-danger'>Eliminar</a>"+"</td>");
-                                       out.println("<td>"+"<a href='editar.jsp?editar="+con.getResultado().getString("autor_id")+"' class='btn btn-primary'>Editar</a>"+"</td>");
-                                       
-                                    out.println("</tr>");
-                                   }
+                                <%                                     Conex con = new Conex();
+                                    if (request.getParameter("buscarNombre") != null) {
+                                        if (request.getParameter("buscarNombre").isEmpty()) {
+                                            con.setConsulta("select sucursales.nombre,sucursales.sucursal_id,usuarios.user  from usuarios,sucursales where sucursales.creado_por=usuarios.usuario_id and sucursales.estado='activo'");
+                                        } else {
+                                            String nombre = request.getParameter("buscarNombre");
+                                            con.setConsulta("select sucursales.nombre,sucursales.sucursal_id,usuarios.user  from usuarios,sucursales where sucursales.nombre like '%" + nombre + "%'and sucursales.creado_por=usuarios.usuario_id and sucursales.estado='activo'");
+ 
+                                        }
+                                    } else {
+                                        con.setConsulta("select sucursales.nombre,sucursales.sucursal_id,usuarios.user  from usuarios,sucursales where sucursales.creado_por=usuarios.usuario_id and sucursales.estado='activo'");
+                                    }
+
+                                    while (con.getResultado().next()) {
+                                        out.println("<tr>");
+                                        out.println("<td>" + con.getResultado().getString("sucursal_id") + "</td>");
+                                        out.println("<td>" + con.getResultado().getString("nombre") + "</td>");
+
+                                        out.println("<td>" + con.getResultado().getString("user") + "</td>");
+
+                                        out.println("<td>" + "<a href='../ServletSucursal?eliminar=" + con.getResultado().getString("sucursal_id") + "' class='btn btn-danger'>Eliminar</a>" + "</td>");
+                                        out.println("<td>" + "<a href='editar.jsp?editar=" + con.getResultado().getString("sucursal_id") + "' class='btn btn-primary'>Editar</a>" + "</td>");
+
+                                        out.println("</tr>");
+                                    }
                                 %>
                             </tbody>
 

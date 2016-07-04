@@ -4,6 +4,14 @@ import Acceso.Conex;
 
 public class Libro {
   Conex con;
+
+    public int getBodega_id() {
+        return bodega_id;
+    }
+
+    public void setBodega_id(int bodega_id) {
+        this.bodega_id = bodega_id;
+    }
     private String isbn;
     private String nombre;
     private int creado_por;
@@ -11,7 +19,7 @@ public class Libro {
     private int autor_id;
     private int libro_id;
     private int cantidad_pagina;
-
+    private int bodega_id;
     public Libro() {
 
         con = new Conex();
@@ -78,7 +86,7 @@ public class Libro {
   
 public void save() {
 
-        con.setInsertar("insert into libros(isbn,nombre,cantidad_paginas,autor_id,idioma_id,creado_por,estado)values('" + this.getIsbn()+ "','"+this.getNombre()+"','"+this.getCantidad_pagina()+"','"+this.getAutor_id()+"','"+this.getIdioma_id()+"','"+this.getCreado_por()+"','ACTIVO')");
+        con.setInsertar("insert into libros(isbn,nombre,cantidad_paginas,autor_id,idioma_id,bodega_id,estado,creado_por)values('" + this.getIsbn()+ "','"+this.getNombre()+"','"+this.getCantidad_pagina()+"','"+this.getAutor_id()+"','"+this.getIdioma_id()+"','"+this.getBodega_id()+"','ACTIVO','"+this.getCreado_por()+"')");
 
     }
 

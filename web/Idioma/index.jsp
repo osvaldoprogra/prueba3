@@ -101,6 +101,7 @@
                     </div>
                     <div class="panel-body">
                         <a href="crear.jsp" class="btn btn-primary">NUEVO IDIOMA</a>
+                        <a href="pdf.jsp" class="btn btn-primary">Listado en PDF</a>
                         <br><br>
                         <form method="POST" action="index.jsp">
                             <div class="form-group">

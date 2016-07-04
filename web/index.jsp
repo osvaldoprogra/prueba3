@@ -109,12 +109,16 @@
 
 
                         <div class="row">
-                            <div class="col-md-3"><a href="Usuario/index.jsp">Usuarios</a></div>
-                            <div class="col-md-3">    <a href="Autor/index.jsp">Autor</a>
+                            <div class="col-md-6"><a href="Usuario/index.jsp">Usuarios</a></div>
+                            <div class="col-md-6">    <a href="Autor/index.jsp">Autor</a>
                             </div>
-                            <div class="col-md-3">    <a href="Idioma/index.jsp">Idioma</a>
+                            <div class="col-md-6">    <a href="Idioma/index.jsp">Idioma</a>
                             </div>
-                            <div class="col-md-3">      <a href="Libro/index.jsp">Libro</a>
+                            <div class="col-md-6">      <a href="Libro/index.jsp">Libro</a>
+                            </div>
+                            <div class="col-md-6">      <a href="Sucursal/index.jsp">Sucrsal</a>
+                            </div>
+                            <div class="col-md-6">      <a href="Bodega/index.jsp">Bodega</a>
                             </div>
 
                         </div>

@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Sucursal" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="59fb40f5-039d-443b-9601-074db0f99584">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     sucursales.`sucursal_id` AS sucursales_sucursal_id,
+     sucursales.`nombre` AS sucursales_nombre,
+     sucursales.`estado` AS sucursales_estado,
+     usuarios.`user` AS usuarios_user
+FROM
+     `sucursales` sucursales INNER JOIN `usuarios` usuarios ON sucursales.`creado_por` = usuarios.`usuario_id`]]>
+	</queryString>
+	<field name="sucursales_sucursal_id" class="java.lang.Integer"/>
+	<field name="sucursales_nombre" class="java.lang.String"/>
+	<field name="sucursales_estado" class="java.lang.String"/>
+	<field name="usuarios_user" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="70" splitType="Stretch">
+			<image>
+				<reportElement x="275" y="0" width="300" height="64" uuid="8393050c-eadf-4356-958b-4c82c88e58d9"/>
+				<imageExpression><![CDATA["leaf_banner_violet.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement style="Title" x="0" y="13" width="263" height="33" uuid="082a783e-4c11-4059-ba11-b1ca0f703fd7"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Sucursal ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="SubTitle" x="63" y="46" width="200" height="22" uuid="806574ca-6dd9-413b-b74e-76a4e6b99f04"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[Listado]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="51" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="35" width="555" height="1" uuid="b4be51c4-39a6-48f3-9d7a-8d642d9f4fcf"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement style="Column header" x="0" y="19" width="138" height="15" uuid="3045e005-3598-420a-8cc1-819a4f859f30"/>
+				<text><![CDATA[sucursal_id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="138" y="19" width="138" height="15" uuid="49e81002-8dee-4705-95a2-c2f567d7c577"/>
+				<text><![CDATA[sucursales]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="414" y="21" width="138" height="15" uuid="4339e784-3962-449c-90c7-23a6ef8ddfb0"/>
+				<text><![CDATA[estado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="276" y="19" width="138" height="15" uuid="0034e9a8-7f39-424c-bc8d-e47ec6aac0ce"/>
+				<text><![CDATA[creado_por]]></text>
+			</staticText>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="433" y="0" width="100" height="20" uuid="9b786367-df3f-4d76-8f60-b759d56f2c09"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="15" width="555" height="1" uuid="dfc690ec-8ea6-4674-aa4d-e481b4dcb359"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement style="Detail" x="0" y="0" width="138" height="15" uuid="c5a4a2ea-1484-4a80-ada5-e840c3fe4fcd"/>
+				<textFieldExpression><![CDATA[$F{sucursales_sucursal_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="138" y="0" width="138" height="15" uuid="5d5342d7-6d78-42d7-a56d-1f21088d390a"/>
+				<textFieldExpression><![CDATA[$F{sucursales_nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="414" y="1" width="138" height="15" uuid="021e1e60-3ff7-4d33-b490-a369e3dee131"/>
+				<textFieldExpression><![CDATA[$F{sucursales_estado}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="276" y="1" width="138" height="15" uuid="a2876d06-b9c1-4afe-860e-193ba0425efc"/>
+				<textFieldExpression><![CDATA[$F{usuarios_user}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="1d596286-0549-4eb6-a562-f1f8725fb1ee"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement style="Column header" x="433" y="0" width="80" height="20" uuid="89b6cea7-7463-4a65-84db-bebb684e0763"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement style="Column header" x="513" y="0" width="40" height="20" uuid="ad13eb61-972f-474e-a57e-7121e1060187"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
